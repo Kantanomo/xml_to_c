@@ -93,7 +93,7 @@ static const std::unordered_map <int, std::string> tag_group_names
 	{ 'shad', "shader" },
 	{ 'sily', "text_value_pair" },
 	{ 'skin', "user_interface_list_skin" },
-	{ 'sky ', "sky" },
+	{ 'sky', "sky" },
 	{ 'slit', "shader_light_response" },
 	{ 'sncl', "sound_classes" },
 	{ 'snd!', "sound" },
@@ -124,4 +124,5 @@ static const std::unordered_map <int, std::string> tag_group_names
 	{ 'wigl', "user_interface_shared_globals" },
 	{ 'wind', "wind" },
 	{ 'wphi', "weapon_hud_interface" },
+	{ 'head', "header"}
 };
