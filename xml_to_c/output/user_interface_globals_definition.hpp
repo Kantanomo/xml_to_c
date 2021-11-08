@@ -21,12 +21,5 @@ tag_reference gametype_collection;//0x10
 tag_reference unicode_strings;//0x18
 };
 TAG_GROUP_SIZE_ASSERT(s_user_interface_globals_group_definition,0x20);
-TAG_REFL(s_user_interface_globals_group_definition)
-	TAG_REFL_TAG_REFERENCE(globals)
-TAG_REFL_TAG_BLOCK_DEF(s_collection_block)
-	TAG_REFL_TAG_REFERENCE(game_shell)
-REFL_END
-	TAG_REFL_TAG_BLOCK(collection)
-	TAG_REFL_TAG_REFERENCE(gametype_collection)
-	TAG_REFL_TAG_REFERENCE(unicode_strings)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_user_interface_globals_group_definition::s_collection_block)	TAG_REFL_TAG_REFERENCE(game_shell)REFL_END
+TAG_REFL(s_user_interface_globals_group_definition)	TAG_REFL_TAG_REFERENCE(globals)	TAG_REFL_TAG_BLOCK(collection)	TAG_REFL_TAG_REFERENCE(gametype_collection)	TAG_REFL_TAG_REFERENCE(unicode_strings)REFL_END

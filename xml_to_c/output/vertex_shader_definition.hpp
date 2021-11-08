@@ -28,13 +28,5 @@ tag_block<s_geometry_classifications_block> geometry_classifications;//0x4
 __int32 output_swizzles;//0xC
 };
 TAG_GROUP_SIZE_ASSERT(s_vertex_shader_group_definition,0x10);
-TAG_REFL(s_vertex_shader_group_definition)
-	TAG_REFL_PROPERTY(platform_type)
-TAG_REFL_TAG_BLOCK_DEF(s_geometry_classifications_block)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_DATA_BLOCK(compiled_shader)
-	TAG_REFL_DATA_BLOCK(code)
-REFL_END
-	TAG_REFL_TAG_BLOCK(geometry_classifications)
-	TAG_REFL_PROPERTY(output_swizzles)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_vertex_shader_group_definition::s_geometry_classifications_block)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_DATA_BLOCK(compiled_shader)	TAG_REFL_DATA_BLOCK(code)REFL_END
+TAG_REFL(s_vertex_shader_group_definition)	TAG_REFL_PROPERTY(platform_type)	TAG_REFL_TAG_BLOCK(geometry_classifications)	TAG_REFL_PROPERTY(output_swizzles)REFL_END

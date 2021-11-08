@@ -32,14 +32,4 @@ float elasticity;//0x30
 PAD(0xC);//0x34
 };
 TAG_GROUP_SIZE_ASSERT(s_point_physics_group_definition,0x40);
-TAG_REFL(s_point_physics_group_definition)
-	TAG_REFL_PROPERTY(flags)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_PROPERTY(density)
-	TAG_REFL_PROPERTY(air_friction)
-	TAG_REFL_PROPERTY(water_friction)
-	TAG_REFL_PROPERTY(surface_friction)
-	TAG_REFL_PROPERTY(elasticity)
-REFL_END
+TAG_REFL(s_point_physics_group_definition)	TAG_REFL_PROPERTY(flags)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_PROPERTY(density)	TAG_REFL_PROPERTY(air_friction)	TAG_REFL_PROPERTY(water_friction)	TAG_REFL_PROPERTY(surface_friction)	TAG_REFL_PROPERTY(elasticity)REFL_END

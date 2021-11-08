@@ -26,7 +26,7 @@ Function to dump the structure of the reflexive block
 field:pointer to the field
 file:pointer to the ofstream object
 */
-void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field,std::ofstream& file, std::ostringstream& rout);
+void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field,std::ofstream& file, std::ostringstream& rout, std::string base);
 /*
 function to output the padding definion,based on the offset differences
 */

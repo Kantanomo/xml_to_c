@@ -121,18 +121,4 @@ __int16 NUM_[ugh]_extra_info_index;//0xE
 __int32 maximum_play_time;//0x10
 };
 TAG_GROUP_SIZE_ASSERT(s_sound_group_definition,0x14);
-TAG_REFL(s_sound_group_definition)
-	TAG_REFL_PROPERTY(flags)
-	TAG_REFL_PROPERTY(sound_class)
-	TAG_REFL_PROPERTY(sample_rate)
-	TAG_REFL_PROPERTY(encoding)
-	TAG_REFL_PROPERTY(compression)
-	TAG_REFL_PROPERTY(NUM_[ugh]_playback_parameter_index)
-	TAG_REFL_PROPERTY(NUM_[ugh]_pitch_range_index)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_PROPERTY(NUM_[ugh]_scale_index)
-	TAG_REFL_PROPERTY(NUM_[ugh]_promotion_index)
-	TAG_REFL_PROPERTY(NUM_[ugh]_custom_playback_index)
-	TAG_REFL_PROPERTY(NUM_[ugh]_extra_info_index)
-	TAG_REFL_PROPERTY(maximum_play_time)
-REFL_END
+TAG_REFL(s_sound_group_definition)	TAG_REFL_PROPERTY(flags)	TAG_REFL_PROPERTY(sound_class)	TAG_REFL_PROPERTY(sample_rate)	TAG_REFL_PROPERTY(encoding)	TAG_REFL_PROPERTY(compression)	TAG_REFL_PROPERTY(NUM_[ugh]_playback_parameter_index)	TAG_REFL_PROPERTY(NUM_[ugh]_pitch_range_index)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_PROPERTY(NUM_[ugh]_scale_index)	TAG_REFL_PROPERTY(NUM_[ugh]_promotion_index)	TAG_REFL_PROPERTY(NUM_[ugh]_custom_playback_index)	TAG_REFL_PROPERTY(NUM_[ugh]_extra_info_index)	TAG_REFL_PROPERTY(maximum_play_time)REFL_END

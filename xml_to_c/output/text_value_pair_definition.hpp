@@ -144,17 +144,5 @@ TAG_BLOCK_SIZE_ASSERT(s_options_block,0xC);
 tag_block<s_options_block> options;//0x1C
 };
 TAG_GROUP_SIZE_ASSERT(s_text_value_pair_group_definition,0x24);
-TAG_REFL(s_text_value_pair_group_definition)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-	TAG_REFL_TAG_REFERENCE(unicode_string_list_of_options)
-	TAG_REFL_STRING_ID(title_text)
-	TAG_REFL_STRING_ID(header_text)
-	TAG_REFL_STRING_ID(description_text)
-TAG_REFL_TAG_BLOCK_DEF(s_options_block)
-	TAG_REFL_PROPERTY(flags)
-	TAG_REFL_PROPERTY(value)
-	TAG_REFL_STRING_ID(label)
-REFL_END
-	TAG_REFL_TAG_BLOCK(options)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_text_value_pair_group_definition::s_options_block)	TAG_REFL_PROPERTY(flags)	TAG_REFL_PROPERTY(value)	TAG_REFL_STRING_ID(label)REFL_END
+TAG_REFL(s_text_value_pair_group_definition)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)	TAG_REFL_TAG_REFERENCE(unicode_string_list_of_options)	TAG_REFL_STRING_ID(title_text)	TAG_REFL_STRING_ID(header_text)	TAG_REFL_STRING_ID(description_text)	TAG_REFL_TAG_BLOCK(options)REFL_END

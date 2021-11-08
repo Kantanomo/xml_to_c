@@ -25,15 +25,5 @@ TAG_BLOCK_SIZE_ASSERT(s_camera_points_block,0x1C);
 tag_block<s_camera_points_block> camera_points;//0x4
 };
 TAG_GROUP_SIZE_ASSERT(s_camera_track_group_definition,0xC);
-TAG_REFL(s_camera_track_group_definition)
-TAG_REFL_TAG_BLOCK_DEF(s_camera_points_block)
-	TAG_REFL_PROPERTY(position_i)
-	TAG_REFL_PROPERTY(position_j)
-	TAG_REFL_PROPERTY(position_k)
-	TAG_REFL_PROPERTY(orientation_i)
-	TAG_REFL_PROPERTY(orientation_j)
-	TAG_REFL_PROPERTY(orientation_k)
-	TAG_REFL_PROPERTY(orientation_w)
-REFL_END
-	TAG_REFL_TAG_BLOCK(camera_points)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_camera_track_group_definition::s_camera_points_block)	TAG_REFL_PROPERTY(position_i)	TAG_REFL_PROPERTY(position_j)	TAG_REFL_PROPERTY(position_k)	TAG_REFL_PROPERTY(orientation_i)	TAG_REFL_PROPERTY(orientation_j)	TAG_REFL_PROPERTY(orientation_k)	TAG_REFL_PROPERTY(orientation_w)REFL_END
+TAG_REFL(s_camera_track_group_definition)	TAG_REFL_TAG_BLOCK(camera_points)REFL_END

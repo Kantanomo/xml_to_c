@@ -1059,60 +1059,15 @@ tag_block<s_create_new_territories_variant_block> create_new_territories_variant
 PAD(-252);//0xFC
 };
 TAG_GROUP_SIZE_ASSERT(s_multiplayer_variant_settings_interface_group_definition,0x0);
-TAG_REFL(s_multiplayer_variant_settings_interface_group_definition)
-TAG_REFL_TAG_BLOCK_DEF(s_game_engine_settings_block)
-	TAG_REFL_PROPERTY(setting_category)
-TAG_REFL_TAG_BLOCK_DEF(s_options_block)
-	TAG_REFL_TAG_REFERENCE(value_pairs)
-REFL_END
-	TAG_REFL_TAG_BLOCK(options)
-REFL_END
-	TAG_REFL_TAG_BLOCK(game_engine_settings)
-	TAG_REFL_TAG_REFERENCE(default_variant_strings)
-TAG_REFL_TAG_BLOCK_DEF(s_default_variants_block)
-	TAG_REFL_STRING_ID(variant_name)
-	TAG_REFL_PROPERTY(variant_type)
-TAG_REFL_TAG_BLOCK_DEF(s_settings_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(settings)
-	TAG_REFL_PROPERTY(description_index)
-REFL_END
-	TAG_REFL_TAG_BLOCK(default_variants)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_slayer_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_slayer_variant)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_king_of_the_hill_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_king_of_the_hill_variant)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_oddball_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_oddball_variant)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_juggernaut_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_juggernaut_variant)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_capture_the_flag_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_capture_the_flag_variant)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_assault_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_assault_variant)
-TAG_REFL_TAG_BLOCK_DEF(s_create_new_territories_variant_block)
-	TAG_REFL_PROPERTY(setting_catergory)
-	TAG_REFL_PROPERTY(value)
-REFL_END
-	TAG_REFL_TAG_BLOCK(create_new_territories_variant)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_game_engine_settings_group_definition::s_options_block)	TAG_REFL_TAG_REFERENCE(value_pairs)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_game_engine_settings_block)	TAG_REFL_PROPERTY(setting_category)	TAG_REFL_TAG_BLOCK(options)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_default_variants_group_definition::s_settings_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_default_variants_block)	TAG_REFL_STRING_ID(variant_name)	TAG_REFL_PROPERTY(variant_type)	TAG_REFL_TAG_BLOCK(settings)	TAG_REFL_PROPERTY(description_index)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_slayer_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_king_of_the_hill_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_oddball_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_juggernaut_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_capture_the_flag_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_assault_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_multiplayer_variant_settings_interface_group_definition::s_create_new_territories_variant_block)	TAG_REFL_PROPERTY(setting_catergory)	TAG_REFL_PROPERTY(value)REFL_END
+TAG_REFL(s_multiplayer_variant_settings_interface_group_definition)	TAG_REFL_TAG_BLOCK(game_engine_settings)	TAG_REFL_TAG_REFERENCE(default_variant_strings)	TAG_REFL_TAG_BLOCK(default_variants)	TAG_REFL_TAG_BLOCK(create_new_slayer_variant)	TAG_REFL_TAG_BLOCK(create_new_king_of_the_hill_variant)	TAG_REFL_TAG_BLOCK(create_new_oddball_variant)	TAG_REFL_TAG_BLOCK(create_new_juggernaut_variant)	TAG_REFL_TAG_BLOCK(create_new_capture_the_flag_variant)	TAG_REFL_TAG_BLOCK(create_new_assault_variant)	TAG_REFL_TAG_BLOCK(create_new_territories_variant)REFL_END

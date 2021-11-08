@@ -8,8 +8,11 @@
 #include <iostream>     // std::cout, std::ios
 #include <sstream>      // std::ostringstream
 
+std::vector<std::string> routs;
+
 void _dump_tag_struct(tag_struct* tag)
 {
+	routs.clear();
 	char dir_loc[256];
 	GetCurrentDirectoryA(256, dir_loc);
 	std::string output_loc = dir_loc;
@@ -40,6 +43,7 @@ void _dump_tag_struct(tag_struct* tag)
 	
 
 	std::ofstream fout(output_loc.c_str());
+
 	std::ostringstream rout;
 
 	fout << "#pragma once\n";
@@ -55,7 +59,7 @@ void _dump_tag_struct(tag_struct* tag)
 		* *********************************************************************/ \n";
 
 	fout << "struct s_" << group_name <<"_group_definition"<< "\n{\n";
-	rout << "TAG_REFL(s_" << group_name << "_group_definition)" << "\r\n";
+	rout << "TAG_REFL(s_" << group_name << "_group_definition)" << "\r";
 	int offset = 0x0;
 	for (int i = 0; i < tag->child_fields.size(); i++)
 	{
@@ -68,6 +72,8 @@ void _dump_tag_struct(tag_struct* tag)
 			curr_offset = offset = t->offset;
 		}
 		std::string name;
+		std::ostringstream r;
+		std::string n;
 		switch (t->type)
 		{
 		case field_type::bitfield8:
@@ -97,60 +103,63 @@ void _dump_tag_struct(tag_struct* tag)
 		case field_type::data_ref:
 			name = _correct_var_name(t->name);
 			fout << "data_block " << name << ";";
-			rout << "\tTAG_REFL_DATA_BLOCK(" << name << ")\r\n";
+			rout << "\tTAG_REFL_DATA_BLOCK(" << name << ")\r";
 			offset += 8;
 			break;
 		case field_type::tag_ref:
 			name = _correct_var_name(t->name);
 			fout << "tag_reference " << name << ";";
-			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r\n";
+			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r";
 			offset += 8;
 			break;
 		case field_type::WC_tag_ref:
 			fout << "tag_referenceN " << name << ";";
-			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r\n";
+			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::string_ID:
 			name = _correct_var_name(t->name);
 			fout << "string_id " << name << ";";
-			rout << "\tTAG_REFL_STRING_ID(" << name << ")\r\n";
+			rout << "\tTAG_REFL_STRING_ID(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::tag_block:
-			_dump_reflexive_struct(t, fout, rout);
+			n = "s_" + group_name + "_group_definition";
+			_dump_reflexive_struct(t, fout, r, n);
+			rout << "\tTAG_REFL_TAG_BLOCK(" << _correct_var_name(t->name) << ")\r";
+			routs.emplace_back(r.str());
 			offset += 8;//size of a reflexive declaration
 			break;
 		case field_type::type_ascii:
 			if (t->string_size == 32) {
 				name = _correct_var_name(t->name);
 				fout << "string32 " << name << ";";
-				rout << "\tTAG_REFL_STRING_32(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_32(" << name << ")\r";
 			}
 			else if (t->string_size == 64) {
 				name = _correct_var_name(t->name);
 				fout << "string64 " << name << ";";
-				rout << "\tTAG_REFL_STRING_64(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_64(" << name << ")\r";
 			}
 			else if (t->string_size == 128) {
 				name = _correct_var_name(t->name);
 				fout << "string128 " << name << ";";
-				rout << "\tTAG_REFL_STRING_128(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_128(" << name << ")\r";
 			}
 			else if (t->string_size == 256) {
 				name = _correct_var_name(t->name);
 				fout << "string256 " << name << ";";
-				rout << "\tTAG_REFL_STRING_256(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_256(" << name << ")\r";
 			}
 			else if (t->string_size == 512) {
 				name = _correct_var_name(t->name);
 				fout << "string512 " << name << ";";
-				rout << "\tTAG_REFL_STRING_512(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_512(" << name << ")\r";
 			}
 			else {
 				name = _correct_var_name(t->name);
 				fout << "string<" << t->string_size << "> " << name << ";";
-				rout << "\tTAG_REFL_STRING(" << name << ", " << t->string_size << ")\r\n";
+				rout << "\tTAG_REFL_STRING(" << name << ", " << t->string_size << ")\r";
 			}
 
 			offset += t->string_size;
@@ -159,27 +168,27 @@ void _dump_tag_struct(tag_struct* tag)
 			if (t->string_size / 2 == 32) {
 				name = _correct_var_name(t->name);
 				fout << "unicode32 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_32(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_32(" << name << ")\r";
 			}
 			else if (t->string_size / 2 == 64) {
 				name = _correct_var_name(t->name);
 				fout << "unicode64 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_64(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_64(" << name << ")\r";
 			}
 			else if (t->string_size / 2 == 128) {
 				name = _correct_var_name(t->name);
 				fout << "unicode128 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_128(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_128(" << name << ")\r";
 			}
 			else if (t->string_size / 2 == 256) {
 				name = _correct_var_name(t->name);
 				fout << "unicode256 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_256(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_256(" << name << ")\r";
 			}
 			else {
 				name = _correct_var_name(t->name);
 				fout << "unicode<" << t->string_size / 2 << "> " << name << ";";
-				rout << "\tTAG_REFL_USTRING(" << name << ", " << t->string_size << ")\r\n";
+				rout << "\tTAG_REFL_USTRING(" << name << ", " << t->string_size << ")\r";
 			}
 
 			offset += t->string_size;
@@ -187,43 +196,43 @@ void _dump_tag_struct(tag_struct* tag)
 		case field_type::type_float32:
 			name = _correct_var_name(t->name);
 			fout << "float " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::type_int16:
 			name = _correct_var_name(t->name);
 			fout << "__int16 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 2;
 			break;
 		case field_type::type_int32:
 			name = _correct_var_name(t->name);
 			fout << "__int32 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::type_int8:
 			name = _correct_var_name(t->name);
 			fout << "__int8 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 1;
 			break;
 		case field_type::type_uint8:
 			name = _correct_var_name(t->name);
 			fout << "unsigned __int8 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 1;
 			break;
 		case field_type::type_uint16:
 			name = _correct_var_name(t->name);
 			fout << "unsigned __int16 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 2;
 			break;
 		case field_type::type_uint32:
 			name = _correct_var_name(t->name);
 			fout << "unsigned __int32 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::colorf:
@@ -231,21 +240,21 @@ void _dump_tag_struct(tag_struct* tag)
 			{
 				name = _correct_var_name(t->name);
 				fout << "real_color_rgb " << name << ";";
-				rout << "\tTAG_REFL_REAL_COLOR_RGB(" << name << ")\r\n";
+				rout << "\tTAG_REFL_REAL_COLOR_RGB(" << name << ")\r";
 				offset += 12;
 			}
 			else if (t->colorfomat == "argb")
 			{
 				name = _correct_var_name(t->name);
 				fout << "real_color_argb " << name << ";";
-				rout << "\tTAG_REFL_REAL_COLOR_ARGB(" << name << ")\r\n";
+				rout << "\tTAG_REFL_REAL_COLOR_ARGB(" << name << ")\r";
 				offset += 16;
 			}
 			break;
 		case field_type::angle:
 			name = _correct_var_name(t->name);
 			fout << "angle " << name << ";";
-			rout << "\tTAG_REFL_ANGLE(" << name << ")\r\n";
+			rout << "\tTAG_REFL_ANGLE(" << name << ")\r";
 			offset += 4;
 			break;
 		}
@@ -260,8 +269,10 @@ void _dump_tag_struct(tag_struct* tag)
 	}
 	fout << "};\n";
 	fout << "TAG_GROUP_SIZE_ASSERT(s_" << group_name << "_group_definition"<< ",0x" << std::uppercase << std::hex << tag->base_size << ");\n";
-	rout << "REFL_END";
-	fout << rout.str().c_str();
+	rout << "REFL_END\r\n";
+	routs.emplace_back(rout.str());
+	for (std::string basic_string : routs)
+		fout << basic_string;
 	fout.close();
 }
 void _dump_bitfield(std::shared_ptr<_plugin_field> field, std::ofstream& fout, std::ostringstream& rout)
@@ -292,7 +303,7 @@ void _dump_bitfield(std::shared_ptr<_plugin_field> field, std::ofstream& fout, s
 	fout << "};\n";
 	std::string name = _correct_var_name(field->name);
 	fout << "e_" << name << " "<< name << ";";
-	rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+	rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 	/*fout << "struct " << _correct_var_name(field->name) << "\n{\n";
 	for (int i = 0; i < (int)field->type; i++)
 	{
@@ -345,13 +356,13 @@ void _dump_enum(std::shared_ptr<_plugin_field> field, std::ofstream& fout, std::
 	fout << "};\n";
 	std::string name = _correct_var_name(field->name);
 	fout << "e_" << name << " " << name << ";";
-	rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+	rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 }
-void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream& fout, std::ostringstream& rout)
+void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream& fout, std::ostringstream& rout, std::string base)
 {
 	std::string struct_name = _correct_var_name(field->name);
 	fout << "struct s_" + struct_name <<"_block"<< "\n{\n";
-	rout << "TAG_REFL_TAG_BLOCK_DEF(s_" << struct_name << "_block)\r\n";
+	rout << "TAG_REFL_TAG_BLOCK_DEF(" + base + "::s_" << struct_name << "_block)\r";
 	int offset = 0x0;
 
 	for (int i = 0; i < field->child_fields.size(); i++)
@@ -365,6 +376,8 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 			curr_offset = offset = t->offset;
 		}
 		std::string name;
+		std::ostringstream r;
+		std::string n;
 		switch (t->type)
 		{
 		case field_type::bitfield8:
@@ -394,61 +407,64 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 		case field_type::data_ref:
 			name = _correct_var_name(t->name);
 			fout << "data_block " << name << ";";
-			rout << "\tTAG_REFL_DATA_BLOCK(" << name << ")\r\n";
+			rout << "\tTAG_REFL_DATA_BLOCK(" << name << ")\r";
 			offset += 8;
 			break;
 		case field_type::tag_ref:
 			name = _correct_var_name(t->name);
 			fout << "tag_reference " << name << ";";
-			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r\n";
+			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r";
 			offset += 8;
 			break;
 		case field_type::WC_tag_ref:
 			name = _correct_var_name(t->name);
 			fout << "tag_referenceN " << name << ";";
-			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r\n";
+			rout << "\tTAG_REFL_TAG_REFERENCE(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::string_ID:
 			name = _correct_var_name(t->name);
 			fout << "string_id " << name << ";";
-			rout << "\tTAG_REFL_STRING_ID(" << name << ")\r\n";
+			rout << "\tTAG_REFL_STRING_ID(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::tag_block:
-			_dump_reflexive_struct(t, fout, rout);
+			 n = base + "::" + "s_" + struct_name + "_group_definition";
+			_dump_reflexive_struct(t, fout, r, n);
+			rout << "\tTAG_REFL_TAG_BLOCK(" << _correct_var_name(t->name) << ")\r";
+			routs.emplace_back(r.str());
 			offset += 8;//size of a reflexive declaration
 			break;
 		case field_type::type_ascii:
 			if (t->string_size == 32) {
 				name = _correct_var_name(t->name);
 				fout << "string32 " << name << ";";
-				rout << "\tTAG_REFL_STRING_32(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_32(" << name << ")\r";
 			}
 			else if (t->string_size == 64) {
 				name = _correct_var_name(t->name);
 				fout << "string64 " << name << ";";
-				rout << "\tTAG_REFL_STRING_64(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_64(" << name << ")\r";
 			}
 			else if (t->string_size == 128) {
 				name = _correct_var_name(t->name);
 				fout << "string128 " << name << ";";
-				rout << "\tTAG_REFL_STRING_128(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_128(" << name << ")\r";
 			}
 			else if (t->string_size == 256) {
 				name = _correct_var_name(t->name);
 				fout << "string256 " << name << ";";
-				rout << "\tTAG_REFL_STRING_256(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_256(" << name << ")\r";
 			}
 			else if (t->string_size == 512) {
 				name = _correct_var_name(t->name);
 				fout << "string512 " << name << ";";
-				rout << "\tTAG_REFL_STRING_512(" << name << ")\r\n";
+				rout << "\tTAG_REFL_STRING_512(" << name << ")\r";
 			}
 			else {
 				name = _correct_var_name(t->name);
 				fout << "string<" << t->string_size << "> " << name << ";";
-				rout << "\tTAG_REFL_STRING(" << name << ", " << t->string_size << ")\r\n";
+				rout << "\tTAG_REFL_STRING(" << name << ", " << t->string_size << ")\r";
 			}
 
 			offset += t->string_size;
@@ -457,27 +473,27 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 			if (t->string_size / 2 == 32) {
 				name = _correct_var_name(t->name);
 				fout << "unicode32 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_32(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_32(" << name << ")\r";
 			}
 			else if (t->string_size / 2 == 64) {
 				name = _correct_var_name(t->name);
 				fout << "unicode64 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_64(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_64(" << name << ")\r";
 			}
 			else if (t->string_size / 2 == 128) {
 				name = _correct_var_name(t->name);
 				fout << "unicode128 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_128(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_128(" << name << ")\r";
 			}
 			else if (t->string_size / 2 == 256) {
 				name = _correct_var_name(t->name);
 				fout << "unicode256 " << name << ";";
-				rout << "\tTAG_REFL_USTRING_256(" << name << ")\r\n";
+				rout << "\tTAG_REFL_USTRING_256(" << name << ")\r";
 			}
 			else {
 				name = _correct_var_name(t->name);
 				fout << "unicode<" << t->string_size / 2 << "> " << name << ";";
-				rout << "\tTAG_REFL_USTRING(" << name << ", " << t->string_size << ")\r\n";
+				rout << "\tTAG_REFL_USTRING(" << name << ", " << t->string_size << ")\r";
 			}
 
 			offset += t->string_size;
@@ -485,43 +501,43 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 		case field_type::type_float32:
 			name = _correct_var_name(t->name);
 			fout << "float " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::type_int16:
 			name = _correct_var_name(t->name);
 			fout << "__int16 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 2;
 			break;
 		case field_type::type_int32:
 			name = _correct_var_name(t->name);
 			fout << "__int32 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::type_int8:
 			name = _correct_var_name(t->name);
 			fout << "__int8 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 1;
 			break;
 		case field_type::type_uint8:
 			name = _correct_var_name(t->name);
 			fout << "unsigned __int8 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 1;
 			break;
 		case field_type::type_uint16:
 			name = _correct_var_name(t->name);
 			fout << "unsigned __int16 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 2;
 			break;
 		case field_type::type_uint32:
 			name = _correct_var_name(t->name);
 			fout << "unsigned __int32 " << name << ";";
-			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r\n";
+			rout << "\tTAG_REFL_PROPERTY(" << name << ")\r";
 			offset += 4;
 			break;
 		case field_type::colorf:
@@ -529,21 +545,21 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 			{
 				name = _correct_var_name(t->name);
 				fout << "real_color_rgb " << name << ";";
-				rout << "\tTAG_REFL_REAL_COLOR_RGB(" << name << ")\r\n";
+				rout << "\tTAG_REFL_REAL_COLOR_RGB(" << name << ")\r";
 				offset += 12;
 			}
 			else if (t->colorfomat == "argb")
 			{
 				name = _correct_var_name(t->name);
 				fout << "real_color_argb " << name << ";";
-				rout << "\tTAG_REFL_REAL_COLOR_ARGB(" << name << ")\r\n";
+				rout << "\tTAG_REFL_REAL_COLOR_ARGB(" << name << ")\r";
 				offset += 16;
 			}
 			break;
 		case field_type::angle:
 			name = _correct_var_name(t->name);
 			fout << "angle " << name << ";";
-			rout << "\tTAG_REFL_ANGLE(" << name << ")\r\n";
+			rout << "\tTAG_REFL_ANGLE(" << name << ")\r";
 			offset += 4;
 			break;
 		}
@@ -560,7 +576,6 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 	fout << "TAG_BLOCK_SIZE_ASSERT(s_" << struct_name << "_block"<< ",0x" << std::hex << field->block_size << ");\n";
 	rout << "REFL_END\r\n";
 	fout << "tag_block<s_" << struct_name << "_block"<< "> " << struct_name << ";";
-	rout << "\tTAG_REFL_TAG_BLOCK(" << struct_name << ")\r\n";
 }
 void _write_padding(int pad_size, std::ofstream& file)
 {

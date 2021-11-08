@@ -35,15 +35,5 @@ tag_block<s_vocalizations_block> vocalizations;//0xC
 string_id mission_dialogue_designator;//0x14
 };
 TAG_GROUP_SIZE_ASSERT(s_dialogue_group_definition,0x18);
-TAG_REFL(s_dialogue_group_definition)
-	TAG_REFL_TAG_REFERENCE(global_dialogue_info)
-	TAG_REFL_PROPERTY(flags)
-TAG_REFL_TAG_BLOCK_DEF(s_vocalizations_block)
-	TAG_REFL_PROPERTY(flags)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_STRING_ID(vocalization)
-	TAG_REFL_TAG_REFERENCE(sound)
-REFL_END
-	TAG_REFL_TAG_BLOCK(vocalizations)
-	TAG_REFL_STRING_ID(mission_dialogue_designator)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_dialogue_group_definition::s_vocalizations_block)	TAG_REFL_PROPERTY(flags)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_STRING_ID(vocalization)	TAG_REFL_TAG_REFERENCE(sound)REFL_END
+TAG_REFL(s_dialogue_group_definition)	TAG_REFL_TAG_REFERENCE(global_dialogue_info)	TAG_REFL_PROPERTY(flags)	TAG_REFL_TAG_BLOCK(vocalizations)	TAG_REFL_STRING_ID(mission_dialogue_designator)REFL_END

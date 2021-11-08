@@ -35,22 +35,5 @@ TAG_BLOCK_SIZE_ASSERT(s_vertices_block,0x80);
 tag_block<s_vertices_block> vertices;//0x98
 };
 TAG_GROUP_SIZE_ASSERT(s_antenna_group_definition,0xA0);
-TAG_REFL(s_antenna_group_definition)
-	TAG_REFL_STRING_ID(attachment_marker_name)
-	TAG_REFL_TAG_REFERENCE(bitmap)
-	TAG_REFL_TAG_REFERENCE(physics)
-	TAG_REFL_PROPERTY(spring_strength_coefficient)
-	TAG_REFL_PROPERTY(falloff_pixels)
-	TAG_REFL_PROPERTY(cutoff_pixels)
-TAG_REFL_TAG_BLOCK_DEF(s_vertices_block)
-	TAG_REFL_PROPERTY(spring_strength_coefficient)
-	TAG_REFL_ANGLE(angle_y)
-	TAG_REFL_ANGLE(angle_p)
-	TAG_REFL_PROPERTY(length)
-	TAG_REFL_PROPERTY(sequence_index)
-	TAG_REFL_PROPERTY(unknown)
-	TAG_REFL_REAL_COLOR_ARGB(color)
-	TAG_REFL_REAL_COLOR_ARGB(lod_color)
-REFL_END
-	TAG_REFL_TAG_BLOCK(vertices)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_antenna_group_definition::s_vertices_block)	TAG_REFL_PROPERTY(spring_strength_coefficient)	TAG_REFL_ANGLE(angle_y)	TAG_REFL_ANGLE(angle_p)	TAG_REFL_PROPERTY(length)	TAG_REFL_PROPERTY(sequence_index)	TAG_REFL_PROPERTY(unknown)	TAG_REFL_REAL_COLOR_ARGB(color)	TAG_REFL_REAL_COLOR_ARGB(lod_color)REFL_END
+TAG_REFL(s_antenna_group_definition)	TAG_REFL_STRING_ID(attachment_marker_name)	TAG_REFL_TAG_REFERENCE(bitmap)	TAG_REFL_TAG_REFERENCE(physics)	TAG_REFL_PROPERTY(spring_strength_coefficient)	TAG_REFL_PROPERTY(falloff_pixels)	TAG_REFL_PROPERTY(cutoff_pixels)	TAG_REFL_TAG_BLOCK(vertices)REFL_END

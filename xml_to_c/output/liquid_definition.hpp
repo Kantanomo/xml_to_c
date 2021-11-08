@@ -150,75 +150,16 @@ TAG_BLOCK_SIZE_ASSERT(s_arcs_block,0xEC);
 tag_block<s_arcs_block> arcs;//0x68
 };
 TAG_GROUP_SIZE_ASSERT(s_liquid_group_definition,0x70);
-TAG_REFL(s_liquid_group_definition)
-	TAG_REFL_PROPERTY(type)
-	TAG_REFL_STRING_ID(attachment_marker_name)
-	TAG_REFL_PROPERTY(falloff_distance_from_camera)
-	TAG_REFL_PROPERTY(cutoff_distance_from_camera)
-TAG_REFL_TAG_BLOCK_DEF(s_arcs_block)
-	TAG_REFL_PROPERTY(flags)
-	TAG_REFL_PROPERTY(sprite_count)
-	TAG_REFL_PROPERTY(natural_length)
-	TAG_REFL_PROPERTY(instances)
-	TAG_REFL_ANGLE(instance_spread_angle)
-	TAG_REFL_PROPERTY(instance_rotation_period)
-	TAG_REFL_TAG_REFERENCE(material_effects)
-	TAG_REFL_TAG_REFERENCE(bitmap)
-TAG_REFL_TAG_BLOCK_DEF(s_horizontal_range_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(horizontal_range)
-TAG_REFL_TAG_BLOCK_DEF(s_vertical_range_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(vertical_range)
-	TAG_REFL_PROPERTY(vertical_negative_scale)
-TAG_REFL_TAG_BLOCK_DEF(s_roughness_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(roughness)
-	TAG_REFL_PROPERTY(octave_1_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_2_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_3_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_4_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_5_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_6_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_7_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_8_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_9_frequency_cycles_per_sec)
-	TAG_REFL_PROPERTY(octave_flags)
-TAG_REFL_TAG_BLOCK_DEF(s_cores_block)
-	TAG_REFL_PROPERTY(bitmap_index)
-TAG_REFL_TAG_BLOCK_DEF(s_thickness_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(thickness)
-TAG_REFL_TAG_BLOCK_DEF(s_color_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(color)
-TAG_REFL_TAG_BLOCK_DEF(s_brightnesstime_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(brightnesstime)
-TAG_REFL_TAG_BLOCK_DEF(s_brightnessfacing_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(brightnessfacing)
-TAG_REFL_TAG_BLOCK_DEF(s_alongaxis_scale_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(alongaxis_scale)
-REFL_END
-	TAG_REFL_TAG_BLOCK(cores)
-TAG_REFL_TAG_BLOCK_DEF(s_rangecollision_scale_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(rangecollision_scale)
-TAG_REFL_TAG_BLOCK_DEF(s_brightnesscollision_scale_block)
-	TAG_REFL_PROPERTY(data)
-REFL_END
-	TAG_REFL_TAG_BLOCK(brightnesscollision_scale)
-REFL_END
-	TAG_REFL_TAG_BLOCK(arcs)
-REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_horizontal_range_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_vertical_range_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_roughness_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_cores_group_definition::s_thickness_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_cores_group_definition::s_color_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_cores_group_definition::s_brightnesstime_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_cores_group_definition::s_brightnessfacing_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_cores_group_definition::s_alongaxis_scale_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_cores_block)	TAG_REFL_PROPERTY(bitmap_index)	TAG_REFL_TAG_BLOCK(thickness)	TAG_REFL_TAG_BLOCK(color)	TAG_REFL_TAG_BLOCK(brightnesstime)	TAG_REFL_TAG_BLOCK(brightnessfacing)	TAG_REFL_TAG_BLOCK(alongaxis_scale)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_rangecollision_scale_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_group_definition::s_brightnesscollision_scale_block)	TAG_REFL_PROPERTY(data)REFL_END
+TAG_REFL_TAG_BLOCK_DEF(s_liquid_group_definition::s_arcs_block)	TAG_REFL_PROPERTY(flags)	TAG_REFL_PROPERTY(sprite_count)	TAG_REFL_PROPERTY(natural_length)	TAG_REFL_PROPERTY(instances)	TAG_REFL_ANGLE(instance_spread_angle)	TAG_REFL_PROPERTY(instance_rotation_period)	TAG_REFL_TAG_REFERENCE(material_effects)	TAG_REFL_TAG_REFERENCE(bitmap)	TAG_REFL_TAG_BLOCK(horizontal_range)	TAG_REFL_TAG_BLOCK(vertical_range)	TAG_REFL_PROPERTY(vertical_negative_scale)	TAG_REFL_TAG_BLOCK(roughness)	TAG_REFL_PROPERTY(octave_1_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_2_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_3_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_4_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_5_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_6_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_7_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_8_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_9_frequency_cycles_per_sec)	TAG_REFL_PROPERTY(octave_flags)	TAG_REFL_TAG_BLOCK(cores)	TAG_REFL_TAG_BLOCK(rangecollision_scale)	TAG_REFL_TAG_BLOCK(brightnesscollision_scale)REFL_END
+TAG_REFL(s_liquid_group_definition)	TAG_REFL_PROPERTY(type)	TAG_REFL_STRING_ID(attachment_marker_name)	TAG_REFL_PROPERTY(falloff_distance_from_camera)	TAG_REFL_PROPERTY(cutoff_distance_from_camera)	TAG_REFL_TAG_BLOCK(arcs)REFL_END
