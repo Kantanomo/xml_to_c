@@ -429,7 +429,7 @@ void _dump_reflexive_struct(std::shared_ptr<_plugin_field> field, std::ofstream&
 			offset += 4;
 			break;
 		case field_type::tag_block:
-			 n = base + "::" + "s_" + struct_name + "_group_definition";
+			 n = base + "::" + "s_" + struct_name + "_block";
 			_dump_reflexive_struct(t, fout, r, n);
 			rout << "\tTAG_REFL_TAG_BLOCK(" << _correct_var_name(t->name) << ")\r";
 			routs.emplace_back(r.str());
